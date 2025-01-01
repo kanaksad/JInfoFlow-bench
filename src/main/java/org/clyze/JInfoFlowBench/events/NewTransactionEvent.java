@@ -3,6 +3,7 @@ package org.clyze.JInfoFlowBench.events;
 import org.clyze.JInfoFlowBench.eventframework.Event;
 
 import java.math.BigDecimal;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Created by neville on 01/11/2016.
@@ -11,9 +12,9 @@ public class NewTransactionEvent extends Event {
 
     public static final String EVENT_NAME = "NewTransaction";
 
-    private String originatorEntityId;
+    private @RUntainted String originatorEntityId;
 
-    private String destinationEntityId;
+    private @RUntainted String destinationEntityId;
 
     private BigDecimal amount;
 
@@ -41,7 +42,7 @@ public class NewTransactionEvent extends Event {
     }
 
     @Override
-    public String getAggregateId() {
+    public @RUntainted String getAggregateId() {
         return originatorEntityId;
     }
 
@@ -53,15 +54,15 @@ public class NewTransactionEvent extends Event {
         return originatorEntityId;
     }
 
-    public void setOriginatorEntityId(String originatorEntityId) {
+    public void setOriginatorEntityId(@RUntainted String originatorEntityId) {
         this.originatorEntityId = originatorEntityId;
     }
 
-    public String getDestinationEntityId() {
+    public @RUntainted String getDestinationEntityId() {
         return destinationEntityId;
     }
 
-    public void setDestinationEntityId(String destinationEntityId) {
+    public void setDestinationEntityId(@RUntainted String destinationEntityId) {
         this.destinationEntityId = destinationEntityId;
     }
 }

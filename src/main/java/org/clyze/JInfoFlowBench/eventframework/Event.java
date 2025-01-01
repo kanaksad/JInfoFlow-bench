@@ -1,6 +1,7 @@
 package org.clyze.JInfoFlowBench.eventframework;
 
 import java.io.Serializable;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Created by neville on 01/11/2016.
@@ -8,15 +9,15 @@ import java.io.Serializable;
 public abstract class Event {
     public abstract String getEventName();
 
-    private String metaData;
+    private @RUntainted String metaData;
 
     public abstract String getAggregateId();
 
-    public void setMetaData(String metaData) {
+    public void setMetaData(@RUntainted String metaData) {
         this.metaData = metaData;
     }
 
-    public String getMetaData() {
+    public @RUntainted String getMetaData() {
         return metaData;
     }
 

@@ -1,6 +1,7 @@
 package org.clyze.JInfoFlowBench.application.basic;
 
 import java.io.*;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Created by neville on 07/11/2016.

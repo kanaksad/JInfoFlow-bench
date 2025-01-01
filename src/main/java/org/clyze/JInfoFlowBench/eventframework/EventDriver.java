@@ -7,16 +7,17 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Created by neville on 01/11/2016.
  */
 public class EventDriver {
 
-    private Collection<EventHandler> eventHandlers = new ArrayList<EventHandler>();
+    private Collection<@RUntainted EventHandler> eventHandlers = new ArrayList<@RUntainted EventHandler>();
 
 
-    public Event newEvent(String eventName) {
+    public @RUntainted Event newEvent(@RUntainted String eventName) {
         Event event;
         try {
             event = (Event) Class.forName("org.clyze.JInfoFlowBench.events." + eventName + "Event").newInstance();
@@ -34,11 +35,11 @@ public class EventDriver {
         return event;
     }
 
-    public UninitialisedEvent createEvent(String eventName) {
+    public UninitialisedEvent createEvent(@RUntainted String eventName) {
         return new UninitialisedEvent(this, newEvent(eventName));
     }
 
-    public void raiseEvent(Event event) {
+    public void raiseEvent(@RUntainted Event event) {
         String eventName = "handle" + event.getEventName();
         for (EventHandler eventHandler : eventHandlers) {
             Boolean hasHandler = false;
@@ -65,10 +66,10 @@ public class EventDriver {
         }
     }
 
-    public void registerAsEventHandler(EventHandler eventHandler) {
+    public void registerAsEventHandler(@RUntainted EventHandler eventHandler) {
         eventHandlers.add(eventHandler);
     }
 
-    private String metaData;
+    private @RUntainted String metaData;
 
 }

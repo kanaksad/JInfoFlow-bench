@@ -1,6 +1,7 @@
 package org.clyze.JInfoFlowBench.application.ctx_sensitivity_only;
 
 import java.io.*;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Created by neville on 07/11/2016.
@@ -21,7 +22,7 @@ public class OverwriteSinks {
             super(out);
         }
 
-        public void println(String st) {
+        public void println(@RUntainted String st) {
             super.println(">> " + st);
         }
     }

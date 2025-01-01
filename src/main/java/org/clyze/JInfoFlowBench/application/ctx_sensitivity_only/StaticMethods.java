@@ -1,6 +1,7 @@
 package org.clyze.JInfoFlowBench.application.ctx_sensitivity_only;
 
 import java.io.*;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
 
 /**
  * Created by neville on 07/11/2016.
@@ -13,7 +14,7 @@ public class StaticMethods {
         writer.println(id("Hello")); // ok
     }
 
-    public static String id(String o) {
+    public static @RPolyTainted String id(@RPolyTainted String o) {
         return o;
     }
 }

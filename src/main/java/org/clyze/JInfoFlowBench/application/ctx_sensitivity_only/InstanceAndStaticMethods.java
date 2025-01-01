@@ -1,6 +1,7 @@
 package org.clyze.JInfoFlowBench.application.ctx_sensitivity_only;
 
 import java.io.*;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Created by neville on 07/11/2016.
@@ -9,31 +10,31 @@ public class InstanceAndStaticMethods {
 
 
     static class Box {
-        String o;
+        @RUntainted String o;
 
-        Box(String o) {
+        Box(@RUntainted String o) {
             this.o = o;
         }
 
-        String get() {
+        @RUntainted String get() {
             return get1();
         }
 
-        String get1() {
+        @RUntainted String get1() {
             return get2();
         }
 
-        String get2() {
+        @RUntainted String get2() {
             return get3();
         }
 
-        String get3() {
+        @RUntainted String get3() {
             return o;
         }
 
     }
 
-    public static String boxGetter(Box box) {
+    public static @RUntainted String boxGetter(Box box) {
         return box.get();
     }
 

@@ -8,20 +8,21 @@ import org.clyze.JInfoFlowBench.events.NewTransactionEvent;
 import org.clyze.JInfoFlowBench.events.UnusedEvent;
 
 import java.io.*;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Created by neville on 01/11/2016.
  */
 public class Events4 implements EventHandler{
 
-    private final String _tainted;
+    private final @RUntainted String _tainted;
 
-    private String tainted;
+    private @RUntainted String tainted;
 
     PrintWriter writer = null;
     EventDriver driver = null;
 
-    public Events4(EventDriver driver, String tainted) throws IOException{
+    public Events4(EventDriver driver, @RUntainted String tainted) throws IOException{
         this.driver = driver;
         this._tainted = tainted;
         writer = new PrintWriter(new FileWriter("sink"));

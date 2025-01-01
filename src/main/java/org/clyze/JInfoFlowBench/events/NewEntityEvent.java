@@ -3,23 +3,24 @@ package org.clyze.JInfoFlowBench.events;
 import org.clyze.JInfoFlowBench.eventframework.Event;
 
 import java.math.BigDecimal;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Created by neville on 01/11/2016.
  */
 public class NewEntityEvent extends Event {
 
-    private String id;
+    private @RUntainted String id;
 
     private String name;
 
     private BigDecimal balance;
 
-    public String getId() {
+    public @RUntainted String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(@RUntainted String id) {
         this.id = id;
     }
 
@@ -45,7 +46,7 @@ public class NewEntityEvent extends Event {
     }
 
     @Override
-    public String getAggregateId() {
+    public @RUntainted String getAggregateId() {
         return getId();
     }
 

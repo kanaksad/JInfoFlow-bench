@@ -7,17 +7,18 @@ import org.clyze.JInfoFlowBench.events.NewEntityEvent;
 import org.clyze.JInfoFlowBench.events.NewTransactionEvent;
 
 import java.io.*;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Created by neville on 01/11/2016.
  */
 public class Events2 implements EventHandler{
 
-    private final String tainted;
+    private final @RUntainted String tainted;
     PrintWriter writer = null;
     EventDriver driver = null;
 
-    public Events2(EventDriver driver, String tainted) throws IOException{
+    public Events2(EventDriver driver, @RUntainted String tainted) throws IOException{
         this.driver = driver;
         this.tainted = tainted;
         writer = new PrintWriter(new FileWriter("sink"));

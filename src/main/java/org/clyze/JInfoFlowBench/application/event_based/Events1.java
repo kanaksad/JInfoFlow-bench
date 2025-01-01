@@ -6,6 +6,7 @@ import org.clyze.JInfoFlowBench.events.NewEntityEvent;
 import org.clyze.JInfoFlowBench.events.NewTransactionEvent;
 
 import java.io.*;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Created by neville on 01/11/2016.

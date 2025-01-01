@@ -1,9 +1,12 @@
+plugins {
+    id 'java'
+    id 'org.checkerframework' version '0.6.37'
+}
+
 group 'JInfoFlow-bench'
 version '1.0-SNAPSHOT'
 
-apply plugin: 'java'
-
-sourceCompatibility = 1.5
+sourceCompatibility = 11
 
 wrapper {
     gradleVersion = "6.7"
@@ -21,8 +24,35 @@ task fatJar(type: Jar) {
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
+    annotationProcessor "edu.ucr.cs.riple.taint:ucrtainting-checker:0.3-SNAPSHOT-securibench"
+    compileOnly "edu.ucr.cs.riple.taint:ucrtainting-checker-qual:0.3-SNAPSHOT"
+}
+
+// Annotator scripts
+def checker_config = project.projectDir.toString() + "/annotator-out/checker.xml"
+checkerFramework {
+    checkers = [
+            'edu.ucr.cs.riple.taint.ucrtainting.UCRTaintingChecker',
+    ]
+
+    extraJavacArgs = [
+            '-AannotatedPackages=' + 'org.clyze',
+            "-AenableLibraryCheck=true",
+            "-AenablePolyTaintInference=true",
+            "-AenableTypeArgumentInference=true",
+            "-AenableSerialization",
+            "-AenableSideEffect",
+            "-AserializationConfigPath=" + checker_config,
+            '-Awarns'
+    ]
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-Xmaxerrs" << "100000"
+    options.compilerArgs << "-Xmaxwarns" << "100000"
 }
